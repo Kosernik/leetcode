@@ -16,7 +16,7 @@ public class ArrangingCoins {
     public int arrangeCoins(int n) {
         // n ~ k*(k+1)/2
         // 2n ~ k^2 + k
-        // k^2 + k - 2n
+        // k^2 + k - 2n ~ 0
         // Ищем дискриминант и решаем квадратное уравнение, нужна целая часть положительного корня уравнения.
         double disc = Math.sqrt(1 + 8L * n);
         return (int) (disc / 2 - 0.5);
