@@ -95,7 +95,7 @@ public class MyLinkedList {
         size--;
     }
 
-    class ListNode {
+    private class ListNode {
         private int val;
         private ListNode next;
         ListNode (int val) {
