@@ -1,3 +1,5 @@
+package MonthlyChallenges;
+
 public class IslandPerimeter {
     public static void main(String[] args) {
         IslandPerimeter solution = new IslandPerimeter();

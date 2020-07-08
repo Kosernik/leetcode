@@ -1,3 +1,5 @@
+package MonthlyChallenges;
+
 import java.util.ArrayList;
 import java.util.List;
 

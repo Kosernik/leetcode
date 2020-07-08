@@ -1,3 +1,5 @@
+package MonthlyChallenges;
+
 public class ArrangingCoins {
     public static void main(String[] args) {
         ArrangingCoins arrangingCoins = new ArrangingCoins();

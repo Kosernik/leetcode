@@ -1,3 +1,5 @@
+package MonthlyChallenges;
+
 import java.util.Arrays;
 
 public class UniquePaths {

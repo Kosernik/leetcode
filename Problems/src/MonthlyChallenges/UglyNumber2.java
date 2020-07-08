@@ -1,3 +1,5 @@
+package MonthlyChallenges;
+
 import java.util.*;
 
 public class UglyNumber2 {

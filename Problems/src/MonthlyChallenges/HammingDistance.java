@@ -1,3 +1,5 @@
+package MonthlyChallenges;
+
 public class HammingDistance {
     public static void main(String[] args) {
         HammingDistance solution = new HammingDistance();
