@@ -91,7 +91,7 @@ public class PrisonCellsAfterNDays {
         }
     }
     // Читаем бит, находящийся по данному индексу
-    private int getBit(int number, int idx) {return (number & 1<<idx)>>idx;}
+    private int getBit(int number, int idx) {return (number & 1<<idx)>>>idx;}
 
 
     private void testPrisonAfterNDays() {
