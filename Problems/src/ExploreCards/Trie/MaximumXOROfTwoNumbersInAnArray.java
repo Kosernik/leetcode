@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MaximumXOROfTwoNumbersInAnArray {
+    public int findMaximumXOR(int[] nums) {
+        if (nums == null || nums.length <= 1) return 0;
+        else if (nums.length > 31) return findMaximumXORTrie(nums);
+        else return findMaximumXORBrute(nums);
+    }
 
-    public int findMaximumXORBrute(int[] nums) {
+    private int findMaximumXORBrute(int[] nums) {
         if (nums == null || nums.length <= 1) return 0;
         int maxXOR = Integer.MIN_VALUE;
         for (int i = 0; i < nums.length-1; i++) {
@@ -16,17 +21,30 @@ public class MaximumXOROfTwoNumbersInAnArray {
         return maxXOR;
     }
 
-
     private Node root;
-    public int findMaximumXOR(int[] nums) {
+    private int findMaximumXORTrie(int[] nums) {
         if (nums == null || nums.length <= 1) return 0;
         else if (nums.length == 2) return nums[0]^nums[1];
 
         root = new Node();
         for (int number : nums) addToTree(number);
 
-        // TODO
-        return -1;
+        int maxXOR = Integer.MIN_VALUE;
+        for (int number : nums) {
+            Node currNode = root;
+            int currXor = 0;
+            for (int i = 31; i >= 0; i--) {
+                int currBit = getBit(number, i);
+                if (currNode.children[1-currBit] != null) {
+                    currXor += 1<<i;
+                    currNode = currNode.children[1-currBit];
+                } else {
+                    currNode = currNode.children[currBit];
+                }
+            }
+            maxXOR = Math.max(maxXOR,currXor);
+        }
+        return maxXOR;
     }
 
     private void addToTree(int number) {
@@ -45,7 +63,6 @@ public class MaximumXOROfTwoNumbersInAnArray {
 
     class Node {
         Node[] children;
-
         Node() {
             this.children = new Node[2];
         }
