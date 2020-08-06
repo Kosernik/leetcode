@@ -19,4 +19,20 @@ public class FindAllDuplicatesInAnArray {
 
         return duplicates;
     }
+    public List<Integer> findDuplicatesArr(int[] nums) {
+        List<Integer> duplicates = new ArrayList<>();
+        if (nums == null || nums.length < 2) return duplicates;
+
+        boolean[] found = new boolean[nums.length+1];
+
+        for (int number : nums) {
+            if (!found[number]) {
+                found[number] = true;
+            } else {
+                duplicates.add(number);
+            }
+        }
+
+        return duplicates;
+    }
 }
