@@ -16,7 +16,7 @@ public class ReorderList {
      * Memory: O(N)
      */
     public void reorderList(ListNode head) {
-        if (head == null || head.next == null) return;;
+        if (head == null || head.next == null) return;
 
         // Creating a stack and adding all nodes to traverse the list backwards.
         Stack<ListNode> stack = new Stack<>();
