@@ -15,7 +15,7 @@ public class PancakeSorting {
 
     /**
      * Sorts an array of integers by reversing first k elements of an array and returns order of flips.
-     * 
+     *
      * @param A - array of integers
      * @return - List of flip operations, 1-indexed
      */
