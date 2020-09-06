@@ -49,9 +49,7 @@ public class ImageOverlap {
         int[][] scaledA = new int[scaleSize][scaleSize];
 
         for (int i = 0; i < length; i++) {
-            for (int j = 0; j < length; j++) {
-                scaledA[i+length-1][j+length-1] = A[i][j];
-            }
+            System.arraycopy(A[i], 0, scaledA[i + length - 1], length - 1, length);
         }
 
         int maxOverlap = 0;
