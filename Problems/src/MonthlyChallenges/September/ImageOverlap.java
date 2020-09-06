@@ -32,7 +32,7 @@ public class ImageOverlap {
     /**
      * Bruteforce checking if images are overlapping.
      *
-     * O(n^2)
+     * O(n^4)
      *
      * @param A - square array of 0 or 1, representing first image.
      * @param B - square array of 0 or 1, representing second image.
