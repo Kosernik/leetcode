@@ -1,4 +1,4 @@
-package MonthlyChallenges;
+package MonthlyChallenges.July;
 
 public class IslandPerimeter {
     public static void main(String[] args) {

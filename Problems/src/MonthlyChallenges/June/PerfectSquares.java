@@ -1,4 +1,4 @@
-package MonthlyChallenges;
+package MonthlyChallenges.June;
 
 import java.util.ArrayList;
 import java.util.List;

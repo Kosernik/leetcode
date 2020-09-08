@@ -1,7 +1,6 @@
-package MonthlyChallenges;
+package MonthlyChallenges.July;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class BestTimeToBuyAndSellStockWithCooldown {
     public static void main(String[] args) {

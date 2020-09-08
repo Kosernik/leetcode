@@ -1,6 +1,4 @@
-package MonthlyChallenges;
-
-import java.util.Map;
+package MonthlyChallenges.July;
 
 public class AngleBetweenHandsOfAClock {
     public static void main(String[] args) {

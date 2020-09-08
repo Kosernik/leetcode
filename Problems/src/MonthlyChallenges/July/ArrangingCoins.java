@@ -1,4 +1,4 @@
-package MonthlyChallenges;
+package MonthlyChallenges.July;
 
 public class ArrangingCoins {
     public static void main(String[] args) {
