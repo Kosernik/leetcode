@@ -17,7 +17,7 @@ public class SearchA2DMatrix {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
-        int height = matrix.length;;
+        int height = matrix.length;
         int width = matrix[0].length;
         int size = height * width;
 
