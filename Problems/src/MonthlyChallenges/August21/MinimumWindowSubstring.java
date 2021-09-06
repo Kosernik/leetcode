@@ -1,6 +1,7 @@
 package MonthlyChallenges.August21;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MinimumWindowSubstring {
     public static void main(String[] args) {
@@ -10,91 +11,85 @@ public class MinimumWindowSubstring {
                 {"ADOBECODEBANC", "ABC"},
                 {"baaaaabb", "abb"},
                 {"baabbaaabb", "abb"},
-                {"abbbbbc", "c"}
+                {"abbbbbc", "c"},
+                {"babb", "baba"}
         };
 
-        System.out.println(solution.minWindow(tests[0][0], tests[0][1]));
+
+        //        System.out.println(solution.minWindow(tests[0][0], tests[0][1]));
+//                System.out.println(solution.minWindow(tests[1][0], tests[1][1]));
+
+        for (String[] test : tests) {
+            System.out.println(solution.minWindow(test[0], test[1]));
+        }
     }
 
+    /**
+     * 76. Minimum Window Substring.
+     *
+     * Complexity - O(N+M), N = s.length, M = t.length
+     * Memory - O(N+M)
+     *
+     * @param s - a string of english letters.
+     * @param t - a string of english letters.
+     * @return - the minimum window substring of "s" such that every character in "t" (including duplicates) is included
+     *          in the window. If there is no such substring, returns the empty string "".
+     */
     public String minWindow(String s, String t) {
-        int[] counts = new int[52];
+        if (t.length() > s.length()) return "";
+        else if (s.equals(t)) return s;
+        else if (t.length() == 1) {
+            if (s.contains(t)) return t;
+            else return "";
+        }
+
+        Map<Character, Integer> count = new HashMap<>();
         for (char ch : t.toCharArray()) {
-            counts[getIndex(ch)]++;
+            count.put(ch, count.getOrDefault(ch, 0) + 1);
         }
 
-        for (int i = 0; i < 52; i++) {
-            if (counts[i] == 0) counts[i] = Integer.MIN_VALUE;
-        }
+        int resultStartIdx = 0;
+        int resultEndIdx = 0;
+        int bestLength = Integer.MAX_VALUE;
 
-        int minLength = Integer.MAX_VALUE;
-        int beginningIdx = 0;
-        int endIdx = 0;
+        int requiredLength = count.size();
 
-        int slow = 0;
-        int fast = 0;
+        int leftIdx = 0;
+        int rightIdx = 0;
+        int currentLength = 0;
 
-        while (slow < s.length()) {
-            System.out.println(counts[0] + ", " + counts[1] + ", " + counts[2] + ", slow " + slow);
+        Map<Character, Integer> currentWindow = new HashMap<>();
 
-            int curIdx = getIndex(s.charAt(slow));
+        while (rightIdx < s.length()) {
+            char ch = s.charAt(rightIdx);
+            int curCount = currentWindow.getOrDefault(ch, 0);
+            currentWindow.put(ch, curCount+1);
 
-            if (counts[curIdx] == Integer.MIN_VALUE) {
-                slow++;
-                continue;
-            }
-            else if (counts[curIdx] < 0) {
-                counts[curIdx]++;
-                slow++;
-                continue;
+            if (count.containsKey(ch) && count.get(ch).intValue() == currentWindow.get(ch).intValue()) {
+                currentLength++;
             }
 
-            if (fast < slow) {
-                System.out.println("Moved stop idx");
-                fast = slow;
-            }
-            while (fast < s.length()) {
-                int idx = getIndex(s.charAt(fast));
-                if (counts[idx] != Integer.MIN_VALUE) {
-                    System.out.println("fast " + fast);
-                    counts[idx]--;
-                    if (isValid(counts)) {
-//                        System.out.println(Arrays.toString(counts));
-                        System.out.println("Found solution");
-                        System.out.println(counts[0] + ", " + counts[1] + ", " + counts[2]);
-                        System.out.println("Slow idx: " + slow + ", fast idx: " + fast);
-                        System.out.println(s.substring(slow, fast+1));
+            while (leftIdx <= rightIdx && requiredLength == currentLength) {
+                char curChar = s.charAt(leftIdx);
 
-                        int curLength = fast - slow + 1;
-                        if (curLength < minLength) {
-                            beginningIdx = slow;
-                            endIdx = fast+1;
-                            minLength = curLength;
-                        }
-                        counts[curIdx]++;
-                        break;
-                    } else {
-                        fast++;
-                    }
-                } else {
-                    fast++;
+                if ((rightIdx - leftIdx + 1) < bestLength) {
+                    bestLength = rightIdx - leftIdx + 1;
+                    resultStartIdx = leftIdx;
+                    resultEndIdx = rightIdx;
                 }
+
+                currentWindow.put(curChar, currentWindow.get(curChar) - 1);
+                if (count.containsKey(curChar) && count.get(curChar) > currentWindow.get(curChar)) {
+                    currentLength--;
+                }
+
+                leftIdx++;
             }
-            slow++;
+
+            rightIdx++;
         }
 
-        return s.substring(beginningIdx, endIdx);
-    }
-
-    private boolean isValid(int[] counts) {
-        for (int count : counts) if (count > 0) return false;
-        return true;
-    }
-
-    private int getIndex(char ch) {
-        if ('A' <= ch && ch <= 'Z') {
-            return (ch - 'A');
-        } else {
-            return (ch - 'a' + 26);
-        }
+        if (bestLength == Integer.MAX_VALUE) return "";
+        return s.substring(resultStartIdx, resultEndIdx+1);
     }
 }
