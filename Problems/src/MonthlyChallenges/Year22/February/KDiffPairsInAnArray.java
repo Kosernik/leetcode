@@ -2,7 +2,7 @@ package MonthlyChallenges.Year22.February;
 
 import java.util.*;
 
-public class KSiffPairsInAnArray {
+public class KDiffPairsInAnArray {
 
     /**
      * LeetCode #532. K-diff Pairs in an Array.
