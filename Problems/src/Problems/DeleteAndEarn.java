@@ -14,7 +14,7 @@ public class DeleteAndEarn {
     /**
      * LeetCode #740. Delete and Earn.
      *
-     * Complexity - O(N*M), N = nums.length, M = max value of a number in nums.
+     * Complexity - O(N+M), N = nums.length, M = max value of a number in nums.
      * Memory - O(N+M)
      *
      * @param nums - an array of positive integers.
