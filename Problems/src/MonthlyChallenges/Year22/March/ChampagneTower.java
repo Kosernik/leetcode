@@ -5,7 +5,7 @@ public class ChampagneTower {
     /**
      * LeetCode #799. Champagne Tower.
      *
-     * Complexity - O(N*M), N = query_row, M = query_glass.
+     * Complexity - O(N^2), N = query_row
      * Memory - O(N)
      *
      * @param poured - the number of cups of champagne.
