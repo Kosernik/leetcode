@@ -21,12 +21,10 @@ public class Airplane {
             if (y % 2 == 0) {
                 y /= 2;
             } else {
-                x += 1;
+                y += 1;
             }
             ans++;
         }
         return ans;
     }
-
-
 }
