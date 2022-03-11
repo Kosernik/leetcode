@@ -25,6 +25,6 @@ public class Airplane {
             }
             ans++;
         }
-        return ans;
+        return ans + x - y;
     }
 }
