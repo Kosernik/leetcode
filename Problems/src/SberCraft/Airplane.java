@@ -11,7 +11,6 @@ public class Airplane {
         //    } else {
         //        y /= 2;
         //    }
-        //    ans++;
         //}
         //return ans + x - y;
         if (x == y) return 0;
