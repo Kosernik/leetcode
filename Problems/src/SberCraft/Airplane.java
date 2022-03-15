@@ -16,15 +16,10 @@ public class Airplane {
         if (x == y) return 0;
         if (x > y) return x - y;
 
-        int ans = 0;
-        while (y > x) {
-            if (y % 2 == 0) {
-                y /= 2;
-            } else {
-                y += 1;
-            }
-            ans++;
+        if (y % 2 == 0) {
+            return brokenDevice(x, y / 2) + 1;
+        } else {
+            return brokenDevice(x, y + 1) + 1;
         }
-        return ans + x - y;
     }
 }
