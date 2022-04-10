@@ -29,4 +29,39 @@ public class KthMissingPositiveNumber {
 
         return arr[arr.length-1] + (k-missed);
     }
+
+
+    /**
+     * LeetCode #1539. Kth Missing Positive Number.
+     *
+     * Complexity - O(logN), N = arr.length.
+     * Memory - O(1)
+     *
+     * @param arr - an array of positive integers sorted in a strictly increasing order. No duplicates.
+     * @param k - positive integer.
+     * @return - k-th missing element.
+     */
+    public int findKthPositiveBinarySearch(int[] arr, int k) {
+        int length = arr.length;
+        int numberOfMissing = arr[length-1] - length;
+
+        if (numberOfMissing < k) {
+            return arr[length-1] + (k - numberOfMissing);
+        }
+
+        int left = 0, right = length, middle;
+
+        while (left < right) {
+            middle = (right - left) / 2 + left;
+            numberOfMissing = arr[middle] - (middle + 1);
+
+            if (numberOfMissing < k) {
+                left = middle + 1;
+            } else {
+                right = middle;
+            }
+        }
+
+        return left + k;
+    }
 }
