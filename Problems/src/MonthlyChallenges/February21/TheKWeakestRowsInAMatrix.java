@@ -1,8 +1,58 @@
 package MonthlyChallenges.February21;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class TheKWeakestRowsInAMatrix {
+    public static void main(String[] args) {
+        TheKWeakestRowsInAMatrix solution = new TheKWeakestRowsInAMatrix();
+
+        int[][] test0 = {
+                {0,0,0,0},
+                {1,0,0,0},
+                {1,1,0,0},
+                {1,1,1,0},
+                {1,1,1,1}
+        };
+        System.out.println(Arrays.toString(solution.kWeakestRows(test0, 1)));
+        System.out.println(Arrays.toString(solution.kWeakestRows(test0, 2)));
+        System.out.println(Arrays.toString(solution.kWeakestRows(test0, 3)));
+        System.out.println("--------------");
+
+        int[][] test1 = {
+                {0,0,0,0,0},
+                {1,0,0,0,0},
+                {1,1,0,0,0},
+                {1,1,1,0,0},
+                {1,1,1,1,0},
+                {1,1,1,1,1}
+        };
+        System.out.println(Arrays.toString(solution.kWeakestRows(test1, 1)));
+        System.out.println(Arrays.toString(solution.kWeakestRows(test1, 2)));
+        System.out.println(Arrays.toString(solution.kWeakestRows(test1, 3)));
+        System.out.println("--------------");
+
+        int[][] test2 = {
+                {1,1,0,0,0},
+                {1,1,1,1,0},
+                {1,0,0,0,0},
+                {1,1,0,0,0},
+                {1,1,1,1,1}
+        };
+        System.out.println(Arrays.toString(solution.kWeakestRows(test2, 3)));
+        System.out.println("--------------");
+
+        int[][] test3 = {
+                {1,0,0,0},
+                {1,1,1,1},
+                {1,0,0,0},
+                {1,0,0,0}
+        };
+        System.out.println(Arrays.toString(solution.kWeakestRows(test3, 2)));
+        System.out.println("--------------");
+    }
+
+
     /**
      * LeetCode #1337.
      *
@@ -18,7 +68,7 @@ public class TheKWeakestRowsInAMatrix {
         );
 
         for (int i = 0; i < mat.length; i++) {
-            int soldiers = getSoldiers(mat, i);
+            int soldiers = getSoldiersBinSearch(mat, i);
 
             heap.add(new int[] {soldiers, i});
             while (heap.size() > k) heap.poll();
@@ -45,4 +95,19 @@ public class TheKWeakestRowsInAMatrix {
         return soldiers;
     }
 
+    private int getSoldiersBinSearch(int[][] mat, int i) {
+        int left = 0, right = mat[i].length, middle;
+
+        while (left < right) {
+            middle = (right - left) / 2 + left;
+
+            if (mat[i][middle] == 0) {
+                right = middle;
+            } else {
+                left = middle + 1;
+            }
+        }
+
+        return right;
+    }
 }
