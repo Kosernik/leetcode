@@ -18,12 +18,7 @@ public class TheKWeakestRowsInAMatrix {
         );
 
         for (int i = 0; i < mat.length; i++) {
-            int soldiers = 0;
-
-            for (int j = 0; j < mat[0].length; j++) {
-                if (mat[i][j] == 0) break;
-                else soldiers++;
-            }
+            int soldiers = getSoldiers(mat, i);
 
             heap.add(new int[] {soldiers, i});
             while (heap.size() > k) heap.poll();
@@ -39,4 +34,15 @@ public class TheKWeakestRowsInAMatrix {
 
         return result;
     }
+
+    private int getSoldiers(int[][] mat, int i) {
+        int soldiers = 0;
+
+        for (int j = 0; j < mat[0].length; j++) {
+            if (mat[i][j] == 0) break;
+            else soldiers++;
+        }
+        return soldiers;
+    }
+
 }
