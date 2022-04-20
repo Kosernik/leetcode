@@ -1,7 +1,6 @@
 package Problems;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class LongestIncreasingSubsequence {
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class LongestIncreasingSubsequence {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = random.nextInt(10000);
         }
-        System.out.println(solution.lengthOfLIS(arr));
+        System.out.println(solution.lengthOfLIS(arr) == solution.lengthOfLISBinSearch(arr));
         System.out.println(Arrays.toString(arr));
     }
 
@@ -46,5 +45,46 @@ public class LongestIncreasingSubsequence {
         }
 
         return result;
+    }
+
+
+    /**
+     * LeetCode #300. Longest Increasing Subsequence.
+     *
+     * Complexity - O(NlogN)
+     * Memory - O(N)
+     *
+     * @param nums - an array of integers.
+     * @return - the length of the longest increasing subsequence.
+     */
+    public int lengthOfLISBinSearch(int[] nums) {
+        List<Integer> sub = new ArrayList<>();
+
+        for (int number : nums) {
+            if (sub.isEmpty() || sub.get(sub.size()-1) < number) {
+                sub.add(number);
+            } else {
+                int idx = binSearch(sub, number);
+                sub.set(idx, number);
+            }
+        }
+
+        return sub.size();
+    }
+
+    private int binSearch(List<Integer> sub, int target) {
+        int left = 0, right = sub.size()-1, middle;
+
+        while (left < right) {
+            middle = (right - left) / 2 + left;
+
+            if (sub.get(middle) < target) {
+                left = middle + 1;
+            } else {
+                right = middle;
+            }
+        }
+
+        return left;
     }
 }
