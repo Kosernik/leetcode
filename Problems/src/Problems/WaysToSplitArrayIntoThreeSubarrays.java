@@ -1,75 +1,129 @@
 package Problems;
 
-import java.util.Arrays;
-
 public class WaysToSplitArrayIntoThreeSubarrays {
     public static void main(String[] args) {
         WaysToSplitArrayIntoThreeSubarrays solution = new WaysToSplitArrayIntoThreeSubarrays();
 
-//        long[] test0 = {0,1,3,5,7,12,12};
-//        long[] test1 = {1,3,3,3,4,4,4,7};
-//        long[] test2 = {2,4,4,4,4,6,6,8};
-//
-//        System.out.println(solution.binarySearchRightmostIndex(test0, 7, test0.length) == 4);
-//        System.out.println(solution.binarySearchRightmostIndex(test0, 8, test0.length) == 4);
-//        System.out.println(solution.binarySearchRightmostIndex(test0, 9, test0.length) == 4);
-//        System.out.println(solution.binarySearchRightmostIndex(test0, 12, test0.length) == 6);
-//
-//        System.out.println(solution.binarySearchRightmostIndex(test1, 0, test1.length) == 0);
-//        System.out.println(solution.binarySearchRightmostIndex(test1, 3, test1.length) == 3);
-//        System.out.println(solution.binarySearchRightmostIndex(test1, 8, test1.length) == 7);
-//
-//        System.out.println(solution.binarySearchRightmostIndex(test2, 2, test2.length) == 0);
-//        System.out.println(solution.binarySearchRightmostIndex(test2, 4, test2.length) == 4);
-//        System.out.println(solution.binarySearchRightmostIndex(test2, 8, test2.length) == 7);
+//        int[] test0 = {0,1,3,5,7,12,12};
+//        int[] test1 = {1,3,3,3,4,4,4,7};
+//        int[] test2 = {2,2,4,4,4,6,6,8};
 
-        int[] test0 = {1,2,2,2,5,0};
-        System.out.println(solution.waysToSplit(test0));
+//        System.out.println(solution.leftmostGreaterOrEqual(test0, -2) == 0);
+//        System.out.println(solution.leftmostGreaterOrEqual(test0, 0) == 0);
+//        System.out.println(solution.leftmostGreaterOrEqual(test0, 4) == 3);
+//        System.out.println(solution.leftmostGreaterOrEqual(test0, 5) == 3);
+//        System.out.println(solution.leftmostGreaterOrEqual(test0, 12) == 5);
+//        System.out.println(solution.leftmostGreaterOrEqual(test0, 13) == 7);
+//
+//        System.out.println(solution.leftmostGreaterOrEqual(test1, 0) == 0);
+//        System.out.println(solution.leftmostGreaterOrEqual(test1, 3) == 1);
+//        System.out.println(solution.leftmostGreaterOrEqual(test1, 7) == 7);
+//        System.out.println(solution.leftmostGreaterOrEqual(test1, 8) == 8);
+//
+//        System.out.println("---------------");
+//        System.out.println(solution.rightmostSmallerOrEqual(test0, -2) == -1);
+//        System.out.println(solution.rightmostSmallerOrEqual(test0, 0) == 0);
+//        System.out.println(solution.rightmostSmallerOrEqual(test0, 4) == 2);
+//        System.out.println(solution.rightmostSmallerOrEqual(test0, 5) == 3);
+//        System.out.println(solution.rightmostSmallerOrEqual(test0, 12) == 6);
+//        System.out.println(solution.rightmostSmallerOrEqual(test0, 13) == 6);
+//
+//        System.out.println(solution.rightmostSmallerOrEqual(test2, 0) == -1);
+//        System.out.println(solution.rightmostSmallerOrEqual(test2, 2) == 1);
+//        System.out.println(solution.rightmostSmallerOrEqual(test2, 3) == 1);
+//        System.out.println(solution.rightmostSmallerOrEqual(test2, 6) == 6);
+//        System.out.println(solution.rightmostSmallerOrEqual(test2, 8) == 7);
+//        System.out.println(solution.rightmostSmallerOrEqual(test2, 9) == 7);
+
+
+        int[] test10 = {1,2,2,2,5,0};
+        System.out.println(solution.waysToSplit(test10));
+
+        int[] test11 = {0,3,3};
+        System.out.println(solution.waysToSplit(test11));
+
+        int[] test12 = {0,0,0,1};
+        System.out.println(solution.waysToSplit(test12));
+
+        int[] test13 = {0,0,0};
+        System.out.println(solution.waysToSplit(test13));
+
+        int[] test14 = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+        System.out.println(solution.waysToSplit(test14));
     }
 
-    private final int MODULO = 1_000_000_007;
-    private long[] prefixSums;
 
-    // TODO wrong algorithm
+    /**
+     * LeetCode #1712. Ways to Split Array Into Three Subarrays.
+     *
+     * Complexity - (N + logN)
+     * Memory - O(N)
+     *
+     * @param nums - an array of non-negative integers.
+     * @return - the number of ways to split nums into 3 good subarrays.
+     */
     public int waysToSplit(int[] nums) {
-        prefixSums = new long[nums.length+1];
+        if (nums.length == 3) return isValidArr(nums);
 
-        for (int i = 0; i < nums.length; i++) {
-            prefixSums[i+1] = prefixSums[i] + nums[i];
+        int MODULO = 1_000_000_007;
+        long result = 0L;
+
+        int[] prefixSums = new int[nums.length];
+        prefixSums[0] = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            prefixSums[i] = prefixSums[i-1] + nums[i];
         }
-        long totalSum = prefixSums[prefixSums.length-1];
+        int totalSum = prefixSums[prefixSums.length-1];
 
-        System.out.println(Arrays.toString(prefixSums));
-        System.out.println("Total sum: " + totalSum);
+        for (int i = 0; i < nums.length-2; i++) {
+            int leftSum = prefixSums[i];
 
-        int rightStart = (int) (totalSum - Math.ceil(totalSum / 3.0));
-        int i = binarySearchRightmostIndex(prefixSums, rightStart, prefixSums.length);
+            int remainder = totalSum - leftSum;
+            if (leftSum*2 > remainder || leftSum*2 < 0) break;
 
-        System.out.println("Right start: " + rightStart + ", idx: " + i);
+            int middleMinIdx = leftmostGreaterOrEqual(prefixSums, leftSum*2);
+            if (middleMinIdx <= i) {
+                middleMinIdx = i+1;
+            }
 
-        int result = 0;
-        for (; i > 1; i--) {
-            long leftSum = prefixSums[i];
+            int middleMaxVal = leftSum + remainder / 2;
+            int middleMaxIdx = rightmostSmallerOrEqual(prefixSums, middleMaxVal);
+            if (middleMaxIdx == nums.length-1) {
+                middleMaxIdx = nums.length-2;
+            }
 
-            long halfSum = leftSum / 2;
-            int numberOfSubArrs = binarySearchRightmostIndex(prefixSums, halfSum, i);
+            int curNumberOfArrays = middleMaxIdx - middleMinIdx + 1;
 
-            System.out.println("Left sum: " + leftSum + ", half sum: " + halfSum + ", number of arrays: " + numberOfSubArrs);
-
-            result = (result + numberOfSubArrs) % MODULO;
+            result = (result + curNumberOfArrays) % MODULO;
         }
 
-        return result;
+        return (int) result;
     }
 
-    private int binarySearchRightmostIndex(long[] arr, long target, int right) {
-        int left = 0, middle;
-        right = right - 1;
+    private int leftmostGreaterOrEqual(int[] prefixSums, int target) {
+        int left = 0, right = prefixSums.length, middle;
+
+        while (left < right) {
+            middle = (right - left) / 2 + left;
+
+            if (prefixSums[middle] < target) {
+                left = middle+1;
+            } else {
+                right = middle;
+            }
+        }
+
+        return left;
+    }
+
+    private int rightmostSmallerOrEqual(int[] prefixSums, int target) {
+        int left = -1, right = prefixSums.length-1, middle;
 
         while (left < right) {
             middle = right - (right - left) / 2;
 
-            if (arr[middle] > target) {
+            if (prefixSums[middle] > target) {
                 right = middle - 1;
             } else {
                 left = middle;
@@ -77,5 +131,13 @@ public class WaysToSplitArrayIntoThreeSubarrays {
         }
 
         return left;
+    }
+
+    private int isValidArr(int[] nums) {
+        if (nums[0] <= nums[1] && nums[1] <= nums[2]) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
