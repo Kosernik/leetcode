@@ -77,13 +77,13 @@ public class NetworkDelayTime {
             }
             result = Math.max(result, totalTimes[i]);
         }
+
         return result;
     }
 
     class Pair {
         int target;
         int time;
-
         Pair (int target, int time) {
             this.target = target;
             this.time = time;
