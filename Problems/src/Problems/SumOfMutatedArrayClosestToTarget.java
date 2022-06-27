@@ -1,53 +1,52 @@
 package Problems;
 
-import java.util.Arrays;
-
 public class SumOfMutatedArrayClosestToTarget {
     public static void main(String[] args) {
         SumOfMutatedArrayClosestToTarget solution = new SumOfMutatedArrayClosestToTarget();
 
-        int[] testArr = {1,2,2,3,4,5,5,6};
-        System.out.println(solution.binarySearchRightmost(0, testArr));
-        System.out.println(solution.binarySearchRightmost(1, testArr));
-        System.out.println(solution.binarySearchRightmost(2, testArr));
-        System.out.println(solution.binarySearchRightmost(5, testArr));
-        System.out.println(solution.binarySearchRightmost(6, testArr));
-        System.out.println(solution.binarySearchRightmost(7, testArr));
+        int[] test = {1547,83230,57084,93444,70879};
+        int target = 71237;
+
+        System.out.println(solution.findBestValue(test, target));
     }
 
     /**
      * LeetCode #1300. Sum of Mutated Array Closest to Target.
      *
-     *  UNTESTED
+     *  Complexity - O(NlogN)
+     *  Memory - O(1)
      *
-     * @param arr
-     * @param target
-     * @return
+     * @param arr - an array of positive integers.
+     * @param target - a positive integer.
+     * @return - the minimum value to make sum of arr elements equal target.
      */
     public int findBestValue(int[] arr, int target) {
-        Arrays.sort(arr);
         int diff = Integer.MAX_VALUE;
         int result = 0;
+        int sum = 0;
+        int max = arr[0];
 
-        int[] prefixSums = new int[arr.length];
-        prefixSums[0] = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            prefixSums[i] = prefixSums[i-1] + arr[i];
+        for (int number : arr) {
+            sum += number;
+            max = Math.max(max, number);
         }
 
-        int lowVal = 0, highVal = (int) Math.ceil(target * 1.0 / arr.length), middle;
+        if (sum == target) return max;
 
-        while (lowVal < highVal) {
+        int lowVal = 0, highVal = max, middle;
+
+        while (lowVal <= highVal) {
             middle = (highVal - lowVal) / 2 + lowVal;
 
-            long sum = getUpdatedSum(middle, arr, prefixSums);
-            int curDiff = (int) Math.abs(sum - target);
+            sum = getUpdatedSum(middle, arr);
+
+            int curDiff = Math.abs(sum - target);
 
             if (curDiff < diff) {
                 result = middle;
                 diff = curDiff;
             } else if (curDiff == diff) {
-                result = Math.min(result, curDiff);
+                result = Math.min(result, middle);
             }
 
             if (sum == target) {
@@ -62,27 +61,11 @@ public class SumOfMutatedArrayClosestToTarget {
         return result;
     }
 
-    private long getUpdatedSum(int value, int[] arr, int[] prefixSums) {
-        int idx = binarySearchRightmost(value, arr);
-        int presum = idx >= 0 ? prefixSums[idx] : 0;
-        long postsum = idx >= 0 ? ((long)value * (arr.length - idx)) : ((long)value * arr.length);
-
-        return presum + postsum;
-    }
-
-    private int binarySearchRightmost(int target, int[] arr) {
-        int left = 0, right = arr.length, middle;
-
-        while (left < right) {
-            middle = (right + left) / 2;
-
-            if (arr[middle] > target) {
-                right = middle;
-            } else {
-                left = middle + 1;
-            }
+    private int getUpdatedSum(int value, int[] arr) {
+        int sum = 0;
+        for (int number : arr) {
+            sum += Math.min(number, value);
         }
-
-        return right - 1;
+        return sum;
     }
 }
