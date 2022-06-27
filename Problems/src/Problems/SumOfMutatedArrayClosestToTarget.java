@@ -13,7 +13,7 @@ public class SumOfMutatedArrayClosestToTarget {
     /**
      * LeetCode #1300. Sum of Mutated Array Closest to Target.
      *
-     *  Complexity - O(NlogN)
+     *  Complexity - O(NlogMax(arr))
      *  Memory - O(1)
      *
      * @param arr - an array of positive integers.
