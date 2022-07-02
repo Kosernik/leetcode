@@ -7,7 +7,7 @@ public class TopKFrequentWords {
     /**
      * LeetCode #692. Top K Frequent Words.
      *
-     * Complexity - O(NlogN)
+     * Complexity - O(NlogK)
      * Memory - O(N)
      *
      * @param words - an array of strings.
@@ -37,7 +37,7 @@ public class TopKFrequentWords {
         return result;
     }
 
-    class Pair implements Comparable{
+    class Pair implements Comparable<Pair>{
         String word;
         int count;
 
@@ -47,12 +47,12 @@ public class TopKFrequentWords {
         }
 
         @Override
-        public int compareTo( Object o) {
-            if (o instanceof Pair) {
-                if (this.count != ((Pair) o).count) {
-                    return Integer.compare(this.count, ((Pair) o).count);
+        public int compareTo(Pair other) {
+            if (other != null) {
+                if (this.count != ((Pair) other).count) {
+                    return Integer.compare(this.count, ((Pair) other).count);
                 } else {
-                    return String.CASE_INSENSITIVE_ORDER.compare(((Pair) o).word, this.word);
+                    return String.CASE_INSENSITIVE_ORDER.compare(((Pair) other).word, this.word);
                 }
             }
             return -1;
