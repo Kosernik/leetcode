@@ -26,25 +26,21 @@ public class SplitArrayIntoConsecutiveSubsequences {
         );
 
         for (int number : nums) {
-            if (pq.isEmpty()) {
-                pq.offer(new Integer[]{number, 1});
-            } else {
-                while (!pq.isEmpty() && (number - pq.peek()[0] > 1)) {
-                    if (pq.peek()[1] < 3) return false;
-                    pq.poll();
-                }
-
-                if (pq.isEmpty() || (pq.peek()[0] == number)) {
-                    pq.offer(new Integer[]{number, 1});
-                    continue;
-                }
-
-                Integer[] prev = pq.poll();
-                prev[0] = number;
-                prev[1]++;
-
-                pq.offer(prev);
+            while (!pq.isEmpty() && (number - pq.peek()[0] > 1)) {
+                if (pq.peek()[1] < 3) return false;
+                pq.poll();
             }
+
+            if (pq.isEmpty() || (pq.peek()[0] == number)) {
+                pq.offer(new Integer[]{number, 1});
+                continue;
+            }
+
+            Integer[] prev = pq.poll();
+            prev[0] = number;
+            prev[1]++;
+
+            pq.offer(prev);
         }
 
         while (!pq.isEmpty()) {
