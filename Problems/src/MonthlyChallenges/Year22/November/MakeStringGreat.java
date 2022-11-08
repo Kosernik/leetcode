@@ -34,8 +34,9 @@ public class MakeStringGreat {
      *
      * @param first  - an english lower or upper-case letter.
      * @param second - an english lower or upper-case letter.
-     * @return - True - if 'first' and 'second' are different letters or same letters but one of them is upper-case and
-     * the other is lower-case. False - otherwise.
+     * @return - True - if 'first' and 'second' are different letters or same letters and both of them are lower-case or
+     * both are upper-case. False - if 'first' and 'second' are same letters but one of them is upper-case and the other
+     * is lower-case.
      */
     private boolean isValidPairOfChars(char first, char second) {
         if ('a' <= first && first <= 'z') {
