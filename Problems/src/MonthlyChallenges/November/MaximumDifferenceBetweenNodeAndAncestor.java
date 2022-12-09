@@ -8,7 +8,7 @@ public class MaximumDifferenceBetweenNodeAndAncestor {
 
     /**
      * Returns the maximum difference of a node in a tree and it`s ancestor.
-     *
+     * <p>
      * Complexity - O(N)
      * Memory - O(MaxDepthOfATree)
      *
@@ -42,7 +42,7 @@ public class MaximumDifferenceBetweenNodeAndAncestor {
         if (leftMM == null) {
             minMax[0] = rightMM[0];
             minMax[1] = rightMM[1];
-        } else if (rightMM == null){
+        } else if (rightMM == null) {
             minMax[0] = leftMM[0];
             minMax[1] = leftMM[1];
         } else {
