@@ -8,7 +8,7 @@ public class ConstrainedSubsequenceSum {
     /**
      * LeetCode #1425. Constrained Subsequence Sum.
      * <p>
-     * Complexity - O(N * logK), N = nums.length, K = k.
+     * Complexity - O(NlogN), N = nums.length.
      * Memory - O(N)
      *
      * @param nums - an array of integers.
