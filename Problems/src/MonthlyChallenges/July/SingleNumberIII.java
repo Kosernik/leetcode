@@ -29,4 +29,34 @@ public class SingleNumberIII {
         }
         return result;
     }
+
+    /**
+     * LeetCode №260. Single Number III.
+     * <p>
+     * Complexity - O(N)
+     * Memory - O(N)
+     *
+     * @param nums - an array of integers in which exactly two elements appear only once and all the other elements
+     *             appear exactly twice.
+     * @return - an array of two elements that appear only once.
+     */
+    public int[] singleNumberAlt(int[] nums) {
+        Set<Integer> numbers = new HashSet<>();
+
+        for (int num : nums) {
+            if (numbers.contains(num)) {
+                numbers.remove(num);
+            } else {
+                numbers.add(num);
+            }
+        }
+
+        int[] result = new int[2];
+        int idx = 0;
+        for (int number : numbers) {
+            result[idx++] = number;
+        }
+
+        return result;
+    }
 }
