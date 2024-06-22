@@ -30,26 +30,26 @@ public class CountNumberOfNiceSubarrays {
     public int numberOfSubarrays(int[] nums, int k) {
         int numberOfNiceSubarrays = 0;
 
-        Deque<Integer> stack = new ArrayDeque<>();
-        stack.add(-1);
+        Deque<Integer> queue = new ArrayDeque<>();
+        queue.add(-1);
 
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] % 2 == 1) {
-                if (stack.size() > k) {
-                    int prevIdx = stack.removeFirst();
-                    int left = stack.peekFirst() - prevIdx - 1;
-                    int right = i - stack.peekLast() - 1;
+                if (queue.size() > k) {
+                    int prevIdx = queue.removeFirst();
+                    int left = queue.peekFirst() - prevIdx - 1;
+                    int right = i - queue.peekLast() - 1;
 
                     numberOfNiceSubarrays += left + right + left * right + 1;
                 }
-                stack.addLast(i);
+                queue.addLast(i);
             }
         }
 
-        if (stack.size() > k) {
-            int prevIdx = stack.removeFirst();
-            int left = stack.peekFirst() - prevIdx - 1;
-            int right = nums.length - stack.peekLast() - 1;
+        if (queue.size() > k) {
+            int prevIdx = queue.removeFirst();
+            int left = queue.peekFirst() - prevIdx - 1;
+            int right = nums.length - queue.peekLast() - 1;
 
             numberOfNiceSubarrays += left + right + left * right + 1;
         }
