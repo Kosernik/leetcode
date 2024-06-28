@@ -16,7 +16,7 @@ public class MaximumTotalImportanceOfRoads {
     /**
      * LeetCode №2285. Maximum Total Importance of Roads.
      * <p>
-     * Complexity - O(N+M), N = n, M = roads.length.
+     * Complexity - O(NlogN + N + M), N = n, M = roads.length.
      * Memory - O(N)
      *
      * @param n     - the total number of cities.
