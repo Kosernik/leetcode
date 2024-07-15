@@ -54,9 +54,10 @@ public class CreateBinaryTreeFromDescriptions {
         for (Map.Entry<Integer, TreeNode> entry : nodes.entrySet()) {
             if (!children.contains(entry.getKey())) {
                 root = entry.getValue();
+                return root;
             }
         }
 
-        return root;
+        return null;
     }
 }
