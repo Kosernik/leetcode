@@ -10,8 +10,8 @@ public class NumberOfGoodLeafNodesPairs {
     /**
      * LeetCode №1530. Number of Good Leaf Nodes Pairs.
      * <p>
-     * Complexity - O(N)
-     * Memory - O(D), D = distance.
+     * Complexity - O(N*D^2), N - the number of nodes in a tree, D = distance.
+     * Memory - O(D)
      * <p>
      * A pair of two different leaf nodes of a binary tree is said to be good if the length of the shortest path between
      * them is less than or equal to distance.
