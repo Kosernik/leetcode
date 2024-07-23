@@ -9,7 +9,7 @@ public class SortArrayByIncreasingFrequency {
      * LeetCode №1636. Sort Array by Increasing Frequency.
      * <p>
      * Complexity - O(N + NlogN)
-     * Memory - O(N + sorting meory)
+     * Memory - O(N + sorting memory)
      *
      * @param nums - an array of integers. -100 <= nums[i] <= 100
      * @return - array nums sorted in increasing order based on the frequency of the values. If multiple values have
