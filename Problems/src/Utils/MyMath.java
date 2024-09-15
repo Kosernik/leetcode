@@ -26,4 +26,15 @@ public class MyMath {
 
         return (int) (product / gcd(a, b));
     }
+
+    /**
+     * Flips a bit at position.
+     *
+     * @param number - an integer.
+     * @param bitIdx - an index at which the bit should be flipped.
+     * @return - the number after flipping a bit at 'bitIdx' position.
+     */
+    public static int flipBit(int number, int bitIdx) {
+        return number ^ (1 << bitIdx);
+    }
 }
