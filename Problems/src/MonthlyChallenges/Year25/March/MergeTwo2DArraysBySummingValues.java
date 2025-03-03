@@ -1,4 +1,4 @@
-package MonthlyChallenges.Year25;
+package MonthlyChallenges.Year25.March;
 
 import java.util.ArrayList;
 import java.util.List;
