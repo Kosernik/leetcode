@@ -8,8 +8,8 @@ public class FindMinimumTimeToReachLastRoomI {
     /**
      * LeetCode №3341. Find Minimum Time to Reach Last Room I.
      * <p>
-     * Complexity - O(N*M), N = moveTime height, M = moveTime width.
-     * Memory - O(N*M)
+     * Complexity - O(NlogN)
+     * Memory - O(N)
      *
      * @param moveTime - a 2d array of positive integers, where moveTime[i][j] represents the minimum time in seconds
      *                 when you can start moving to that room.
