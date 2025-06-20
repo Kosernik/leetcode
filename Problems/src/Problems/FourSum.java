@@ -1,6 +1,8 @@
 package Problems;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FourSum {
     public static void main(String[] args) {
@@ -16,7 +18,7 @@ public class FourSum {
         int testTarget = 200;
 
         List<List<Integer>> testRes = solution.fourSum(testTLE, testTarget);
-        System.out.println(testRes.size());
+        System.out.println(testRes.size()); // 33
         for (List<Integer> res : testRes) {
             System.out.println(res);
         }
@@ -31,7 +33,9 @@ public class FourSum {
 
     /**
      * LeetCode №18. 4Sum.
-     * TLE
+     * <p>
+     * Complexity - O(N^3)
+     * Memory - O(1)
      *
      * @param nums   - an array of integers.
      * @param target - the target sum.
@@ -44,48 +48,50 @@ public class FourSum {
         long targetL = (long) target;
 
         Arrays.sort(nums);
-        Map<Long, List<int[]>> pairSums = new HashMap<>();
-        Set<String> used = new HashSet<>();
-
-        for (int i = 0; i < length - 1; i++) {
-            int num = nums[i];
-            for (int j = i + 1; j < length; j++) {
-                int[] pair = new int[2];
-                pair[0] = i;
-                pair[1] = j;
-                long sum = num + nums[j];
-
-                if (!pairSums.containsKey(sum)) {
-                    pairSums.put(sum, new ArrayList<>());
-                }
-
-                pairSums.get(sum).add(pair);
-            }
-        }
 
         for (int i = 0; i < length - 3; i++) {
-            int num = nums[i];
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            long num = nums[i];
+
             for (int j = i + 1; j < length - 2; j++) {
-                int curNum = nums[j];
-                long remainder = targetL - num - curNum;
+                if (j > (i + 1) && nums[j] == nums[j - 1]) continue;
 
-                if (!pairSums.containsKey(remainder)) continue;
+                long curSum = num + nums[j];
+                long remainingSum = targetL - curSum;
 
-                for (int[] pair : pairSums.get(remainder)) {
-                    if (pair[0] == i || pair[0] == j || pair[1] == i || pair[1] == j) continue;
+                if (remainingSum < curSum) {
+                    break;
+                }
 
-                    List<Integer> combination = new ArrayList<>();
-                    combination.add(num);
-                    combination.add(curNum);
-                    combination.add(nums[pair[0]]);
-                    combination.add(nums[pair[1]]);
+                int left = j + 1, right = length - 1;
+                while (left < right) {
+                    if ((remainingSum - nums[left] - nums[right]) == 0) {
+                        List<Integer> quadruplet = new ArrayList<>();
+                        quadruplet.add(nums[i]);
+                        quadruplet.add(nums[j]);
+                        quadruplet.add(nums[left]);
+                        quadruplet.add(nums[right]);
+                        result.add(quadruplet);
 
-                    Collections.sort(combination);
-
-                    if (!used.contains(combination.toString())) {
-                        used.add(combination.toString());
-
-                        result.add(combination);
+                        while (left < right && nums[left] == nums[left + 1]) {
+                            left++;
+                        }
+                        left++;
+                        while (right > left && nums[right] == nums[right - 1]) {
+                            right--;
+                        }
+                        right--;
+                    } else if ((remainingSum - nums[left] - nums[right]) > 0) {
+                        while (left < right && nums[left] == nums[left + 1]) {
+                            left++;
+                        }
+                        left++;
+                    } else {
+                        while (right > left && nums[right] == nums[right - 1]) {
+                            right--;
+                        }
+                        right--;
                     }
                 }
             }
