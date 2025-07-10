@@ -1,4 +1,4 @@
-package MonthlyChallenges;
+package MonthlyChallenges.Year25.July;
 
 import java.util.HashMap;
 import java.util.Map;
