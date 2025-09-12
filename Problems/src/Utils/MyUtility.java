@@ -1,6 +1,6 @@
 package Utils;
 
-public class MyMath {
+public class MyUtility {
     /**
      * Greatest Common Divider
      *
@@ -61,5 +61,50 @@ public class MyMath {
         }
 
         return result;
+    }
+
+    /**
+     * Checks if a given letter is a lowercase english vowel.
+     * <p>
+     * Complexity - O(1)
+     * Memory - O(1)
+     *
+     * @param letter - a char.
+     * @return - true if a given letter is a lowercase english vowel, false - otherwise.
+     */
+    public static boolean isLowerCaseVowel(char letter) {
+        // 0x104111 = bitmask for vowels = 0b00000000000100000100000100010001
+        // (letter - 97) = (letter - 'a')
+        // >> shift bitmask to the index of a given letter
+        return ((0x104111 >> (letter - 97)) & 1) == 1;
+    }
+
+    /**
+     * Checks if a given letter is an uppercase english vowel.
+     * <p>
+     * Complexity - O(1)
+     * Memory - O(1)
+     *
+     * @param letter - a char.
+     * @return - true if a given letter is a uppercase english vowel, false - otherwise.
+     */
+    public static boolean isUpperCaseVowel(char letter) {
+        // 0x104111 = bitmask for vowels = 0b00000000000100000100000100010001
+        // (letter - 65) = (letter - 'A')
+        // >> shift bitmask to the index of a given letter
+        return ((0x104111 >> (letter - 65)) & 1) == 1;
+    }
+
+    /**
+     * Checks if a given letter is an english vowel.
+     * <p>
+     * Complexity - O(1)
+     * Memory - O(1)
+     *
+     * @param letter - a char.
+     * @return - true if a given letter is an english vowel, false - otherwise.
+     */
+    public static boolean isVowel(char letter) {
+        return ((0x104111 >> (letter - 97)) & 1) == 1 || ((0x104111 >> (letter - 65)) & 1) == 1;
     }
 }
