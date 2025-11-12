@@ -1,6 +1,7 @@
 package Utils;
 
 public class MyUtility {
+
     /**
      * Greatest Common Divider
      *
@@ -9,8 +10,26 @@ public class MyUtility {
      * @return - the greatest common divider.
      */
     public static int gcd(int a, int b) {
+        // Euclidean algorithm iteratively
+        while (b != 0) {
+            int remainder = a % b;
+            a = b;
+            b = remainder;
+        }
+
+        return a;
+    }
+
+    /**
+     * Greatest Common Divider
+     *
+     * @param a - a positive integer.
+     * @param b - a positive integer.
+     * @return - the greatest common divider.
+     */
+    public static int gcdRecursive(int a, int b) {
         if (b == 0) return a;
-        return gcd(b, a % b);
+        return gcdRecursive(b, a % b);
     }
 
 
