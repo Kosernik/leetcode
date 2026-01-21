@@ -50,11 +50,22 @@ public class MyUtility {
      * Flips a bit at position.
      *
      * @param number - an integer.
-     * @param bitIdx - an index at which the bit should be flipped.
+     * @param bitIdx - an index at which the bit should be flipped. 0-indexed from the rightmost(least significant) bit.
      * @return - the number after flipping a bit at 'bitIdx' position.
      */
     public static int flipBit(int number, int bitIdx) {
         return number ^ (1 << bitIdx);
+    }
+
+    /**
+     * Sets a bit at position to 0.
+     *
+     * @param number - an integer.
+     * @param bitIdx - an index at which the bit should be set ot 0. 0-indexed from the rightmost(least significant) bit.
+     * @return - the number after setting the bit to 0.
+     */
+    public static int unsetBit(int number, int bitIdx) {
+        return number & ~(1 << bitIdx);
     }
 
     /**
