@@ -12,7 +12,7 @@ public class MinimumNumberOfFlipsToMakeBinaryStringAlternating {
     /**
      * LeetCode №1888. Minimum Number of Flips to Make the Binary String Alternating.
      * <p>
-     * Complexity - O(N^2)
+     * Complexity - O(N)
      * Memory - O(1)
      * <p>
      * Allowed operations:
