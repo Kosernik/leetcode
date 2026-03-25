@@ -37,12 +37,12 @@ public class EqualSumGridPartitionI {
         int idx = Arrays.binarySearch(rowSums, halfSum);
         if (idx >= 0 && rowSums[idx] == halfSum) return true;
 
-        for (int col = 0; col < width; col++) {
-            if (col >= 1) {
-                colSums[col] += colSums[col - 1];
-            }
+        if (colSums[0] == halfSum) return true;
+        for (int col = 1; col < width; col++) {
+            colSums[col] += colSums[col - 1];
 
             if (colSums[col] == halfSum) return true;
+            else if (colSums[col] > halfSum) return false;
         }
 
         return false;
