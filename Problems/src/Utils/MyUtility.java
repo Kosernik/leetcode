@@ -94,6 +94,30 @@ public class MyUtility {
     }
 
     /**
+     * Computes the power of big numbers. Result is returned modulo.
+     *
+     * @param base   - the number that needs to be powered.
+     * @param power  - the exponent.
+     * @param MODULO - an integer modulo.
+     * @return - base raised to the power.
+     */
+    public static long powFast(long base, long power, int MODULO) {
+        long result = 1L;
+
+        while (power > 0) {
+            if ((power & 1) == 1) {
+                result = (result * base) % MODULO;
+            }
+
+            base = (base * base) % MODULO;
+
+            power >>= 1;
+        }
+
+        return result;
+    }
+
+    /**
      * Checks if a given letter is a lowercase english vowel.
      * <p>
      * Complexity - O(1)
