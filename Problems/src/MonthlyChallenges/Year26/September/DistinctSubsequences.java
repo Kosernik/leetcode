@@ -53,10 +53,11 @@ public class DistinctSubsequences {
         int[] curDp = new int[sourceLength + 1];
         for (int row = 1; row < targetLength; row++) {
             Arrays.fill(curDp, 0);
+            char targetChar = target.charAt(row);
 
             for (int col = row; col < (sourceLength - targetLength + row + 1); col++) {
                 curDp[col + 1] = curDp[col];
-                if (source.charAt(col) == target.charAt(row)) {
+                if (source.charAt(col) == targetChar) {
                     curDp[col + 1] += dpArr[col];
                 }
             }
