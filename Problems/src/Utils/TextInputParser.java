@@ -37,4 +37,15 @@ public class TextInputParser {
 
         return result;
     }
+
+    public static String parseStringLine(String name) {
+        File file = new File("Problems/src/DataInput/" + name);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return scanner.nextLine();
+    }
 }
